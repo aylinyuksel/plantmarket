@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
 
     #Custom Apps
     'core',
-    'userauths'
+    'userauths',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+JAZZMIN_SETTINGS = {
+    'site_header' : "ShopifyHub",
+    'site_brand' : "you order we deliver",
+    'site_logo' : "assets/imgs/theme/loading.gif",
+    'copyright' : "shopifyhub-shop.com",
+}
+
+AUTH_USER_MODEL = 'userauths.User'
