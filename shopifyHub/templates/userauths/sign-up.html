@@ -1,0 +1,12 @@
+
+
+
+<form action="" method="POST"
+    {% csrf_token %} 
+    {{form.as_p}}
+    <button type ="submit"> Register </button>
+</form>
+<!--POST kayıt yapınca urlde datayı siler
+    GET sensetive data-->
+
+<!-- REGISTER YAPINCA CSRF TOKEN IS MISSING HATASI VERIYO-->
