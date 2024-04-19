@@ -85,7 +85,7 @@ class Product(models.Model):
     old_price = models.DecimalField(max_digits=999999999999, decimal_places=2, default=2.99)
 
     specifications = models.TextField(null=True, blank=True)
-    tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
+    # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
 
     product_status = models.CharField(choices=STATUS, max_length=10, default="in_review")
 
@@ -94,7 +94,7 @@ class Product(models.Model):
     featured = models.BooleanField(default=False)
     digital = models.BooleanField(default=False)
 
-    sku = ShortUUIDField(unique=True, length=4, max_length=10, prefix="sku" alphabet="1234567890")
+    sku = ShortUUIDField(unique=True, length=4, max_length=10, prefix="sku", alphabet="1234567890")
    
     date = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(null=True, blank=True)
@@ -109,7 +109,7 @@ class Product(models.Model):
         return self.title
     
     def get_precentage(self):
-        new_price = (self.price 86/ self.old_price) * 100
+        new_price = (self.price / self.old_price) * 100
         return new_price
     
 
@@ -122,7 +122,7 @@ class ProductImages(models.Model):
         verbose_name_plural = "Product Images"
 
 
-################################################################# Cart, Order, OrderItems and Address ###################################################################
+################################################################# Cart, Order, OrderItems ###################################################################
 
 class CartOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -138,6 +138,7 @@ class CartOrder(models.Model):
 
 class CartOrderItems(models.Model):
     order = models.ForeignKey(User, on_delete=models.CASCADE)
+    invoice_no = models.CharField(max_length=200)
     product_status = models.CharField(max_length=200)
     item = models.CharField(max_length=200)
     image = models.CharField(max_length=200)
@@ -145,7 +146,45 @@ class CartOrderItems(models.Model):
     price = models.DecimalField(max_digits=999999999999, decimal_places=2, default=1.99)
     total = models.DecimalField(max_digits=999999999999, decimal_places=2, default=1.99)
 
+    class Meta:
+        verbose_name_plural = "Cart Order Items"
+
+    def order_image(self):
+        return mark_safe('<img src="/media/%s" width="50" height="50" />' % (self.image))
 
 
+################################################################# Cproduct review, wishlist and Address ###################################################################
 
+class ProductReview(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    review = models.TextField()
+    rating = models.IntegerField(choices=RATING, default=True)
 
+    class Meta:
+        verbose_name_plural = "Product Reviews"
+
+    def __str__(self):
+        return self.product.title
+    
+    def get_rating(self):
+        return self.rating
+    
+class wishlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    date = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural = "wishlist"
+
+    def __str__(self):
+        return self.product.title
+
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    address = models.CharField(max_length=100, null=True)
+    status = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = "Address"
