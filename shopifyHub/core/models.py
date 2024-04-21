@@ -79,7 +79,8 @@ class Product(models.Model):
     description = models.TextField(null=True, blank=True, default="This is the product")
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    cagtegory = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="category")
+    vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True)
 
     price = models.DecimalField(max_digits=999999999999, decimal_places=2, default=1.99)
     old_price = models.DecimalField(max_digits=999999999999, decimal_places=2, default=2.99)
@@ -88,6 +89,7 @@ class Product(models.Model):
     # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
 
     product_status = models.CharField(choices=STATUS, max_length=10, default="in_review")
+    
 
     status = models.BooleanField(default=True)
     in_stock = models.BooleanField(default=True)
