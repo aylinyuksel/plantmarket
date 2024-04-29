@@ -56,7 +56,7 @@ class Vendor(models.Model):
     address = models.CharField(max_length=100, default="123 Main street.")
     contact = models.CharField(max_length=100, default= "+123 456 789")
     chat_resp_time = models.CharField(max_length=100, default="100")
-    shippin_on_time = models.CharField(max_length=100, default="100")
+    shipping = models.CharField(max_length=100, default="100")
     authentic_rating = models.CharField(max_length=100, default="100")
     days_return = models.CharField(max_length=100, default="100")
     warranty_period = models.CharField(max_length=100, default="100")

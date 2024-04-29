@@ -3,7 +3,11 @@ from core.models import Product, Category, Vendor, ProductImages, ProductReview,
 
 def default(request):
     categories = Category.objects.all()
-    address = Address.objects.get(user=request.user)
+    # address = Address.objects.get(user=request.user)
+    try:
+        address = Address.objects.get(user=request.user)
+    except:
+        address = None
 
     return { 
         'categories':categories,
