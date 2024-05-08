@@ -140,11 +140,11 @@ $("#add-to-cart-btn").on("click", function(){
     let product_price = $("#current-product-price").text()
     let this_val = $(this)
 
-    console.log("quantıty: ", quantity);
-    console.log("title: ", product_title);
-    console.log("price: ", product_price);
-    console.log("id: ", product_id);
-    console.log("current element: ", this_val)
+    console.log("Quantity: ", quantity);
+    console.log("Title: ", product_title);
+    console.log("Price: ", product_price);
+    console.log("ID: ", product_id);
+    console.log("Current Element: ", this_val)
 
     $.ajax({
         url: '/add-to-cart',

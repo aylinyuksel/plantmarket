@@ -82,9 +82,10 @@
                                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                                 </div> -->
                                                     <input type="number" value="1" name="" id="product-quantity" class="w-25 mb-10">
-                                                    <br>                                            <div class="product-extra-link2">
-                                                    <input type="hidden" value="{{p.id}}" class="product-id">
-                                                    <input type="hidden" value="{{p.title}}" class="product-title">
+                                                    <br>                                           
+                                                     <div class="product-extra-link2">
+                                                    <input type="hidden" value="{{p.id}}" class="product-id" name="" id="">
+                                                    <input type="hidden" value="{{p.title}}" class="product-title"  name="" id="">
                                                     <button type="submit" class="button button-add-to-cart" id="add-to-cart-btn"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
                                                     <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                                     <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
@@ -409,7 +410,7 @@
                                                             <span> </span>
                                                         </div>
                                                         <div class="product-price">
-                                                            <span>{{ p.price}}</span><span>TL</span>
+                                                            <span >{{ p.price}}</span><span>TL</span>
                                                             <span class="old-price">{{ p.old_price }}TL</span>
                                                         </div>
                                                     </div>
