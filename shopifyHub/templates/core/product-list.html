@@ -32,7 +32,7 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="http://127.0.0.1:8000" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> Shop <span></span> Fillter
                 </div>
             </div>
@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 mb-lg-0 mb-md-2 mb-sm-2">
+                            {% comment %} <div class="col-xl-3 col-lg-6 col-md-6 mb-lg-0 mb-md-2 mb-sm-2">
                                 <div class="card">
                                     <h5 class="mb-30">By Tags</h5>
                                     <div class="sidebar-widget widget-tags">
@@ -108,7 +108,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                             <div class="col-xl-3 col-lg-6 col-md-6 mb-lg-0 mb-md-5 mb-sm-5">
                                 <div class="card">
                                     <h5 class="mb-10">By Price</h5>
@@ -136,9 +136,9 @@
                 </div>
                 <div class="col-12">
                     <div class="shop-product-fillter">
-                        <div class="totall-product">
-                            <p>We found <strong class="text-brand">29</strong> items for you!</p>
-                        </div>
+                        {% comment %} <div class="totall-product">
+                            <p>We found <strong class="text-brand">{{products.count}}</strong> item{{products.count|pluralize}} for you!</p>
+                        </div> {% endcomment %}
                         <div class="sort-by-product-area">
                             <div class="sort-by-cover mr-10">
                                 <div class="sort-by-product-wrap">
@@ -256,13 +256,13 @@
                     </div>  -->
                     <section class="section-padding pb-5">
                         <div class="section-title">
-                            <h3 class="">Deals Of The Day</h3>
+                            {% comment %} <h3 class="">Deals Of The Day</h3>
                             <a class="show-all" href="shop-grid-right.html">
                                 All Deals
                                 <i class="fi-rs-angle-right"></i>
                             </a>
-                        </div>
-                        <div class="row">
+                        </div> {% endcomment %}
+                        {% comment %} <div class="row">
                             <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="product-cart-wrap style-2">
                                     <div class="product-img-action-wrap">
@@ -411,7 +411,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                     </section>
                     <!--End Deals-->
                 </div>
