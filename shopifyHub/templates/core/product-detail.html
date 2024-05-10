@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="http://127.0.0.1:8000" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> <a href="shop-grid-right.html">Vegetables & tubers</a> <span></span> Seeds of Change Organic
+                    <span></span>{{p.category}}<span></span> {{p.title}}
                 </div>
             </div>
         </div>
@@ -95,8 +95,8 @@
 
 
                                                     <button type="submit" class="button button-add-to-cart add-to-cart-btn" data-index="{{ p.id }}" id="add-to-cart-btn" ><i class="fi-rs-shopping-cart"></i>Add to cart</button>
-                                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href=" "><i class="fi-rs-heart"></i></a>
+                                                    <a aria-label="Compare" class="action-btn hover-up" href=" "><i class="fi-rs-shuffle"></i></a>
                                                 </div>
                                             </div>
                                             <div class="font-xs">
@@ -121,9 +121,9 @@
                                             <li class="nav-item">
                                                 <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Description</a>
                                             </li>
-                                            <li class="nav-item">
+                                            <!-- <li class="nav-item">
                                                 <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a>
-                                            </li>
+                                            </li> -->
                                             <li class="nav-item">
                                                 <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Vendor</a>
                                             </li>
@@ -139,7 +139,7 @@
                                                 </p>
                                             </div>
                                             </div>
-                                            <div class="tab-pane fade" id="Additional-info">
+                                            <!-- <div class="tab-pane fade" id="Additional-info">
                                                 <table class="font-md">
                                                     <tbody>
                                                         <tr class="stand-up">
@@ -228,7 +228,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            </div>
+                                            </div> -->
                                             <div class="tab-pane fade" id="Vendor-info">
                                                 <div class="vendor-logo d-flex mb-30">
                                                     <img src="{{p.vendor.image.url}}" alt="" />
@@ -255,7 +255,7 @@
                                                     </div>
                                                     <div class="mr-30">
                                                         <p class="text-brand font-xs">Ship on time</p>
-                                                        <h4 class="mb-0">{{p.vendor.shipping_on_time}}%</h4>
+                                                        <h4 class="mb-0">{{p.vendor.shipping}}%</h4>
                                                     </div>
                                                     <div>
                                                         <p class="text-brand font-xs">Chat response</p>
@@ -403,11 +403,11 @@
                                                                 <img class="hover-img" src="{{ p.image.url}}" alt="" />
                                                             </a>
                                                         </div>
-                                                        <div class="product-action-1">
+                                                        <!-- <div class="product-action-1">
                                                             <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
                                                             <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
                                                             <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="product-badges product-badges-position product-badges-mrg">
                                                             <span class="hot">Hot</span>
                                                         </div>
@@ -471,7 +471,7 @@
                                     <img src="{{p.vendor.image.url}}" alt="" />
                                     <div class="vendor-name ml-15">
                                         <h6>
-                                            <a href="vendor-details-2.html">{{p.vendor.title}}</a>
+                                            <a href="">{{p.vendor.title}}</a>
                                         </h6>
                                         <div class="product-rate-cover text-end">
                                             <div class="product-rate d-inline-block">
@@ -503,30 +503,20 @@
                                 <ul>
                                     <li class="hr"><span></span></li>
                                 </ul>
-                                <p>Become a Vendor? <a href="page-register.html"> Register now</a></p>
+                                <p>Become a Vendor? <a href=""> Register now</a></p>
                             </div>
                             <div class="sidebar-widget widget-category-2 mb-30">
                                 <h5 class="section-title style-1 mb-30">Category</h5>
                                 <ul>
+                                    {% for c in categories %}
                                     <li>
-                                        <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-1.svg' %}" alt="" />Milks & Dairies</a><span class="count">30</span>
+                                        <a href="{% url 'core:category-product-list' c.cid %}"> <img src="{{c.image.url}}" alt="" />{{c.title}}</a><span class="count">{{c.category.all.count}}</span>
                                     </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-2.svg' %}" alt="" />Clothing</a><span class="count">35</span>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-3.svg' %}" alt="" />Pet Foods </a><span class="count">42</span>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-4.svg' %}" alt="" />Baking material</a><span class="count">68</span>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-5.svg' %}" alt="" />Fresh Fruit</a><span class="count">87</span>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                             <!-- Fillter By Price -->
-                            <div class="sidebar-widget price_range range mb-30">
+                            <!-- <div class="sidebar-widget price_range range mb-30">
                                 <h5 class="section-title style-1 mb-30">Fill by price</h5>
                                 <div class="price-filter">
                                     <div class="price-filter-inner">
@@ -565,7 +555,7 @@
                                 </div>
                                 <a href="shop-grid-right.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</a>
                             </div>
-                            <!-- Product sidebar Widget -->
+                            Product sidebar Widget
                             <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
                                 <h5 class="section-title style-1 mb-30">New products</h5>
                                 <div class="single-post clearfix">
@@ -613,7 +603,7 @@
                                         Save 17% <br /> on <span class="text-brand">Oganic</span><br /> Juice
                                     </h4>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

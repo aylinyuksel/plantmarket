@@ -32,7 +32,7 @@
                     <div class="col-12 col-lg-8 mx-auto">
                         <div class="shop-product-fillter">
                             <div class="totall-product">
-                                <p>We have <strong class="text-brand">{{vendors.count}}</strong> vendor{{vendors.count|pluralize}} now</p>
+                                <p>We have <strong class="text-brand">{{vendors.count}}</strong> vendor{{vendors.count|pluralize}}!</p>
                             </div>
                             <div class="sort-by-product-area">
                                 <div class="sort-by-cover mr-10">
@@ -91,13 +91,13 @@
                                     </a>
                                 </div>
                                 <div class="mt-10">
-                                    <span class="font-small total-product">{{v.product.all.count}}Products</span>
+                                    <span class="font-small total-product">{{v.product.all.count}}  Products</span>
                                 </div>
                             </div>
                             <div class="vendor-content-wrap">
                                 <div class="mb-30">
                                     <div class="product-category">
-                                        <span class="text-muted">Since {{v.date|date:"Y"}}</span> <!--since calismiyor-->
+                                        <!-- <span class="text-muted">Since {{v.date|date:"Y"}}</span> since calismiyor -->
                                     </div>
                                     <h4 class="mb-5"><a href="{% url 'core:vendor-detail' v.vid %}">{{v.title}}</a></h4>
                                     <div class="product-rate-cover">
