@@ -62,9 +62,12 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            {% comment %} <div class="short-desc mb-30">
-                                                <p class="font-lg">{{p.description|truncatechars:100}}</p>
-                                            </div> {% endcomment %}
+                                            <div class="short-desc mb-30">
+                                                {% comment %} <p class="font-lg">{{p.description|truncatechars:100}}</p> {% endcomment %}
+                                                <div class="">
+                                                    <p>{{p.description|safe|truncatechars:100}}</p>
+                                                </div>
+                                            </div>
                                             <!-- <div class="attr-detail attr-size mb-30">
                                                 <strong class="mr-10">Size / Weight: </strong>
                                                 <ul class="list-filter size-filter font-small">
