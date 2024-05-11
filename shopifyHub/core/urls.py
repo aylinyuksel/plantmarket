@@ -1,5 +1,5 @@
 from django.urls import path
-from core.views import index, product_list_view, category_list_view, category_product_list_view, vendor_detail_view, vendor_list_view, product_detail_view, tag_list, ajax_add_review, search_view, filter_product, add_to_cart, cart_view ,delete_item_from_cart, update_cart, checkout_view
+from core.views import index, product_list_view, category_list_view, category_product_list_view, vendor_detail_view, vendor_list_view, product_detail_view, tag_list, ajax_add_review, search_view, filter_product, add_to_cart, cart_view ,delete_item_from_cart, update_cart, checkout_view, costumer_dashboard, order_detail, make_address_default
 
 
 app_name ="core"
@@ -48,5 +48,12 @@ urlpatterns = [
     # checkout
     path("checkout/", checkout_view, name="checkout"),
 
-    
+    # dashboard
+    path("dashboard/", costumer_dashboard, name="dashboard"),
+
+    # order detail
+    path("dashboard/order/<int:id>", order_detail, name="order-detail"),
+
+    # making address default
+    path("make-deafult-address/", make_address_default, name="make-deafult-address")
 ]

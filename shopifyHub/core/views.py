@@ -8,6 +8,7 @@ from core.models import Product, Category, Vendor, ProductImages, ProductReview,
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -66,7 +67,7 @@ def vendor_detail_view(request, vid):
 
 def product_detail_view(request, pid):
     product = Product.objects.get(pid=pid)
-     # product = get_object_or_404(Product, pid=pid)
+    # product = get_object_or_404(Product, pid=pid)
     products = Product.objects.filter(category=product.category).exclude(pid=pid)
 
     #Getting all review related to a product 
@@ -262,4 +263,51 @@ def checkout_view(request):
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
 
-        return render(request, "core/checkout.html", {"cart_data": request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount})     
+        try:
+            active_address = Address.objects.get(user=request.user, status=True)
+        except:
+            messages.warning(request, "There are multiple addresses")
+            active_address = None
+
+        return render(request, "core/checkout.html", {"cart_data": request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount, "active_address":active_address})     
+
+@login_required
+def costumer_dashboard(request):
+    orders = CartOrder.objects.filter(user=request.user).order_by("-id")
+    address = Address.objects.filter(user=request.user)
+
+    if request.method == "POST":
+        address = request.POST.get("address")
+        mobile = request.POST.get("mobile")
+
+        new_address = Address.objects.create(
+            user=request.user,
+            address = address,
+            mobile = mobile,
+        )
+        messages.success(request, "Address Added Successfully.")
+        return redirect("core:dashboard")
+
+    
+    context = {
+        "orders": orders,
+        "address": address,
+    }
+    return render(request, "core/dashboard.html", context)
+
+
+def order_detail(request, id):
+    order = CartOrder.objects.filter(user=request.user, id=id)
+    order_items = CartOrderItems.objects.filter(order=order)
+    context = {
+        "order_items": order_items,
+    }
+    return render(request, "core/order-detail.html", context)
+
+
+def make_address_default(request):
+    id = request.GET['id']
+    Address.objects.update(status=False)
+    Address.objects.filter(id=id).update(status=True)
+    return JsonResponse({"boolean":True})
+

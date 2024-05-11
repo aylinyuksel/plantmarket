@@ -241,9 +241,40 @@ $(document).ready(function (){
 
 
         })
-       
-        
-   
+   })
+
+   //default addresses
+   $(document).on("click", ".make-default-address", function(){
+    
+    let id = $(this).attr("data-address-id")
+    let this_val = $(this)
+
+    console.log("ID is: ", id);
+    console.log("element is: ", this_val);
+
+     $.ajax({
+        url: "/make-deafult-address",
+        data: {
+            "id": id
+        },
+        dataType: "json",
+        success: function(response){
+            console.log("Address Made Default");
+            if (response.boolean == true){
+
+                $(".check").hide()
+                $(".action_btn").show()
+
+                $(".check"+id).show()
+                $(".button"+id).hide()
+
+
+            }
+        }
+
+
+     })
+
    })
 
 })
@@ -291,4 +322,8 @@ $(document).ready(function (){
 //     })
 
 // })
+
+
+
+
 

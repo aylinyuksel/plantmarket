@@ -29,6 +29,7 @@ class wishlistAdmin(admin.ModelAdmin):
 
 class AddressAdmin(admin.ModelAdmin):
     list_display = ['user', 'address', 'status']
+    list_editable = ['address', 'status' ]
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
