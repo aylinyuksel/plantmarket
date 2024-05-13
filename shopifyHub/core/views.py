@@ -4,11 +4,12 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.db.models import Count, Avg
 from stripe import Review
 from taggit.models import Tag 
-from core.models import Product, Category, Vendor, ProductImages, ProductReview,  CartOrder, CartOrderItems, wishlist, Address
+from core.models import Product, Category, Vendor, ProductImages, ProductReview,  CartOrder, CartOrderItems, wishlist_model, Address
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 
 
 # Create your views here.
@@ -311,3 +312,49 @@ def make_address_default(request):
     Address.objects.filter(id=id).update(status=True)
     return JsonResponse({"boolean":True})
 
+@login_required
+def wishlist_view(request):
+    wishlist = wishlist_model.objects.all()
+    context = {
+      "w": wishlist
+    }
+    return render(request, 'core/wishlist.html', context)
+
+def add_to_wishlist(request):
+    product_id = request.GET['id']
+    product = Product.objects.get(id=product_id)
+
+    context = {}
+
+    wishlist_count = wishlist_model.objects.filter(product=product, user=request.user).count()
+    print(wishlist_count)
+
+    if  wishlist_count > 0:
+        context = {
+            "bool" : True
+        }
+    else:
+        new_wishlist = wishlist_model.objects.create(
+            product=product,
+            user=request.user
+        )
+        context = {
+           "bool": True
+        }
+
+    return JsonResponse(context)
+
+def remove_wishlist(request):
+    pid = request.GET['id']
+    wishlist=wishlist_model.objects.filter(user=request.user)
+    wishlist_d = wishlist_model.objects.get(id=pid)
+    delete_product = wishlist_d.delete()
+
+    context ={
+        "bool": True,
+        "w":wishlist
+
+    }
+    wishlist_json = serializers.serialize('json', wishlist)
+    t = render_to_string("core/async/wishlist-list.html",context)
+    return JsonResponse({"data":t, "w":wishlist_json})

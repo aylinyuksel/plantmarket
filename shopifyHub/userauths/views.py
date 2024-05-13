@@ -39,26 +39,24 @@ def login_view(request):
 
         try:
             user = User.objects.get(email=email)
-            user = authenticate(request,email=email,password=password)
-
-            if user is not None: 
-                login(request, user)
-                messages.success(request,"you are logged in.")
-                return redirect("core:index")
-            else:
-                messages.warning(request,"user does not exist,create an account.")
-            
         except:
             messages.warning(request, f"User with {email} does not exist")
 
-        
+        user = authenticate(request,email=email,password=password)
 
+        if user is not None: 
+            login(request, user)
+            messages.success(request,"you are logged in.")
+            return redirect("core:index")
+        else:
+            messages.warning(request,"user does not exist,create an account.")
+            
     context= {
         
 
     }
 
-    return render(request,"userauths/sign-in.html", context)
+    return render(request,"userauths/sign-in.html",context)
 
 
 def logout_view(request):
